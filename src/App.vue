@@ -3,7 +3,9 @@
 </script>
 
 <template>
-  <p>xDDDDDDD</p>
+  <main class="grid place-items-center h-screen bg-zinc-950">
+    <p>xDDDDDDD</p>
+  </main>
 </template>
 
 <style scoped>
