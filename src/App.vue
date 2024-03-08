@@ -1,11 +1,10 @@
 <script setup lang="ts">
 // import { RouterLink, RouterView } from 'vue-router'
+import MainLayout from '@/components/MainLayout.vue';
 </script>
 
 <template>
-  <main class="grid place-items-center h-screen bg-zinc-950">
-    <p>xDDDDDDD</p>
-  </main>
+  <MainLayout />
 </template>
 
 <style scoped>
