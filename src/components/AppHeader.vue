@@ -13,12 +13,12 @@
                 :key="item.name"
                 :to="item.href"
                 :class="[
-                  item.current
+                  currentPath === item.href
                     ? 'bg-zinc-600 text-white'
                     : 'text-white hover:bg-gray-700 hover:text-white',
                   'rounded-md px-3 py-2 text-sm font-medium'
                 ]"
-                :aria-current="item.current ? 'page' : undefined"
+                :aria-current="currentPath === item.href ? 'page' : undefined"
               >
                 {{ item.name }}
               </router-link>
@@ -86,12 +86,12 @@
           as="a"
           :href="item.href"
           :class="[
-            item.current
+            currentPath === item.href
               ? 'bg-zinc-600 text-white'
               : 'text-gray-300 hover:bg-gray-700 hover:text-white',
             'block rounded-md px-3 py-2 text-base font-medium'
           ]"
-          :aria-current="item.current ? 'page' : undefined"
+          :aria-current="currentPath === item.href ? 'page' : undefined"
           >{{ item.name }}</DisclosureButton
         >
       </div>
@@ -132,6 +132,19 @@ import {
 } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { BeakerIcon } from '@heroicons/vue/24/solid'
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+const currentPath = ref(route.path)
+
+watch(
+  () => route.path,
+  (newValue: string): void => {
+    currentPath.value = newValue
+  }
+)
 
 const user = {
   name: 'Tom Cook',
@@ -140,8 +153,8 @@ const user = {
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 }
 const navigation = [
-  { name: 'Home', href: '/', current: true },
-  { name: 'Register Consumption', href: '/register_consumption', current: false }
+  { name: 'Home', href: '/' },
+  { name: 'Register Consumption', href: '/register_consumption' }
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
